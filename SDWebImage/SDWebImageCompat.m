@@ -43,6 +43,13 @@ UIImage *SDScaledImageForPath(NSString *path, NSObject *imageOrData)
             if (range.location != NSNotFound)
             {
                 scale = 2.0;
+            } else {
+                // Shelfworthy compat hack to fix loading on 3x device
+                range = [path rangeOfString:@"@3x." options:0 range:NSMakeRange(path.length - 8, 5)];
+                if (range.location != NSNotFound)
+                {
+                    scale = 3.0;
+                }
             }
         }
 
